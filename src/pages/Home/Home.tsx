@@ -1,33 +1,32 @@
-import { z } from "zod";
+import { useSnackbar } from "notistack";
 import { Form } from "../../components/form";
-
-const schema = z.object({
-  cpf: z
-    .string({ required_error: "O seu nome é obrigatório." })
-    .min(1, "O seu nome é obrigatório."),
-  uf: z
-    .enum(["SP", "MG", "BR"], { required_error: "O estado é obrigatório." })
-    .refine((val) => ["SP", "MG", "BR"].includes(val), {
-      message: "O estado deve ser 'SP', 'MG', ou 'BR'",
-    }),
-  birthday: z.string(), // TODO: Mudar para date
-  loan: z
-    .number({ required_error: "O valor do empréstimo é obrigatório." })
-    .min(0)
-    .max(50000, {
-      message: "O valor do empréstimo deve ser menor que R$ 50.000,00",
-    }),
-  installment: z
-    .number({
-      required_error: "O valor da parcela é obrigatório.",
-    })
-    .min(0), // TODO: Validar porcentagem do valor total
-});
+import { useFetch } from "../../hooks/use-fetch";
+import {
+  requestLoanSimulationSchema,
+  requestLoanSimulationType,
+} from "./schema";
+import { useEffect } from "react";
 
 const Home = () => {
-  const handleRequestLoanSimulation = (values) => {
-    console.log(values);
+  const { enqueueSnackbar } = useSnackbar();
+  const [{ isFetching, error }, fetch] = useFetch("/loan-simulation", {
+    method: "POST",
+    manual: true,
+  });
+
+  const handleRequestLoanSimulation = async (
+    body: requestLoanSimulationType
+  ) => {
+    await fetch({ body });
   };
+
+  useEffect(() => {
+    if (error) {
+      enqueueSnackbar("Ocorreu um erro ao solicitar o empréstimo", {
+        variant: "error",
+      });
+    }
+  }, [error, enqueueSnackbar]);
 
   return (
     <>
@@ -43,18 +42,22 @@ const Home = () => {
         <section className="bg-white rounded-md shadow-[0px_0px_10px_0px_#ECECEC] p-8 mt-6">
           <Form
             formId={crypto.randomUUID()}
-            schema={schema}
+            schema={requestLoanSimulationSchema}
             onSubmit={handleRequestLoanSimulation}
           >
             <Form.Input name="cpf" placeholder="CPF" />
             <Form.Input name="uf" placeholder="UF" />
             <Form.Input name="birthday" placeholder="Data de Nascimento" />
-            <Form.Input name="loan" placeholder="Valor do Empréstimo" />
+            <Form.Input
+              name="loan"
+              placeholder="Valor do Empréstimo"
+              type="number"
+            />
             <Form.Input
               name="installment"
               placeholder="Qual valor deseja pagar por mês?"
             />
-            <Form.Button>Simular</Form.Button>
+            <Form.Button disabled={isFetching}>Simular</Form.Button>
           </Form>
         </section>
       </main>
