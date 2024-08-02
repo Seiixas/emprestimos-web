@@ -33,7 +33,11 @@ export const Form = <T extends FieldValues>(props: FormProps<T>) => {
 
   return (
     <FormProvider {...form}>
-      <form id={formId} onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        id={formId}
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-4"
+      >
         {typeof children === "function"
           ? children({
               reset: (values) => form.reset(values),

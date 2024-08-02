@@ -7,6 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        text: {
+          'primary': '#8F99A6',
+        },
         border: {
           500: '#D4D4D4',
         },
@@ -15,7 +18,10 @@ export default {
         },
         error: {
           500: '#cc0000'
-        }
+        },
+        background: {
+          500: '#f6f6f6'
+        },
     }
   },
 

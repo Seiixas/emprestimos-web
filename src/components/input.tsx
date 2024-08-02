@@ -17,10 +17,10 @@ const BaseInput = ({ name, ...rest }: InputProps) => {
         {...rest}
         {...field}
         placeholder={placeholder}
-        className="border-2 border-border-500 rounded-md px-4 py-2"
+        className="border border-border-500 rounded-md px-4 py-3"
       />
       {!!formState.errors[name] && (
-        <span className="text-error-500 text-sm">
+        <span className="text-error-500 text-sm p-1">
           {formState.errors[name]?.message?.toString()}
         </span>
       )}
