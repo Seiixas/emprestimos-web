@@ -1,10 +1,10 @@
 import { SnackbarProvider } from "notistack";
-import { Routes } from "./routes";
+import { AppRoutes } from "./routes";
 
 export default function App() {
   return (
     <SnackbarProvider>
-      <Routes />
+      <AppRoutes />
     </SnackbarProvider>
   );
 }

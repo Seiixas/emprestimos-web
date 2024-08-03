@@ -22,6 +22,9 @@ export default {
         background: {
           500: '#f6f6f6'
         },
+        green: {
+          500: '#21AE1E'
+        }
     }
   },
 
