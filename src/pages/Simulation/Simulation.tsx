@@ -63,32 +63,34 @@ const Simulation = () => {
         <section className="bg-white rounded-md shadow-[0px_0px_10px_0px_#ECECEC] p-8 mt-6">
           <article className="grid grid-cols-3 grid-rows-3 gap-4 items-start">
             <div>
-              <p>VALOR REQUERIDO</p>
+              <p className="text-gray-500">VALOR REQUERIDO</p>
               <p className="font-bold">R$ 60.000,00</p>
             </div>
             <div>
-              <p>TAXA DE JUROS</p>
+              <p className="text-gray-500">TAXA DE JUROS</p>
               <p className="font-bold">1% ao mês</p>
             </div>
             <div>
-              <p>VALOR QUE DESEJA PAGAR POR MÊS</p>
+              <p className="text-gray-500">VALOR QUE DESEJA PAGAR POR MÊS</p>
               <p className="font-bold">R$ 15.000,00</p>
             </div>
             <div>
-              <p>TOTAL DE MESES PARA QUITAR</p>
+              <p className="text-gray-500">TOTAL DE MESES PARA QUITAR</p>
               <p className="font-bold">5 MESES</p>
             </div>
             <div>
-              <p>TOTAL DE JUROS</p>
+              <p className="text-gray-500">TOTAL DE JUROS</p>
               <p className="font-bold">R$ 1.545,53</p>
             </div>
             <div>
-              <p>TOTAL A PAGAR</p>
+              <p className="text-gray-500">TOTAL A PAGAR</p>
               <p className="font-bold">R$ 61.545,53</p>
             </div>
           </article>
           <article className="flex flex-col gap-6">
-            <h3 className="font-bold">PROJEÇÃO DAS PARCELAS:</h3>
+            <h3 className="font-bold text-sm text-gray-500">
+              PROJEÇÃO DAS PARCELAS:
+            </h3>
             <Table headers={tableHeaders} data={data} /> //TODO:Ajustar tipagens
             <Button variant="secondary">
               <span>EFETIVAR O EMPRÉSTIMO</span>
