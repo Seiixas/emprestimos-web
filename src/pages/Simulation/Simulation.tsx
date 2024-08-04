@@ -56,7 +56,7 @@ const Simulation = () => {
     <>
       <main>
         <header className="flex flex-col items-center gap-8">
-          <h1 className="font-bold">
+          <h1 className="font-bold ">
             Veja a simulação para o seu empréstimo antes de efetivar
           </h1>
         </header>

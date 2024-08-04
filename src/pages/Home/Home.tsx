@@ -9,15 +9,27 @@ import { useEffect } from "react";
 
 const Home = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const [{ isFetching, error }, fetch] = useFetch("/loan-simulation", {
+  const [{ isFetching, error }, fetch] = useFetch("/loans/simulation", {
     method: "POST",
     manual: true,
   });
 
-  const handleRequestLoanSimulation = async (
-    body: requestLoanSimulationType
-  ) => {
-    await fetch({ body });
+  const handleRequestLoanSimulation = async ({
+    cpf,
+    uf,
+    birthday,
+    loan,
+    installment,
+  }: requestLoanSimulationType) => {
+    await fetch({
+      body: {
+        cpf,
+        uf,
+        birthday,
+        loan: Number(loan), // TODO: Refatorar para usar o zod para fazer a conversão
+        installments: Number(installment),
+      },
+    });
   };
 
   useEffect(() => {
