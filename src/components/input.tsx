@@ -2,7 +2,7 @@ import { forwardRef, InputHTMLAttributes, LegacyRef, Ref } from "react";
 import { useController, useFormContext } from "react-hook-form";
 import InputMask, { ReactInputMask } from "react-input-mask";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   mask?: string;
 }

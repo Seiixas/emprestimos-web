@@ -1,7 +1,7 @@
 import { forwardRef, Ref, SelectHTMLAttributes } from "react";
 import { useController, useFormContext } from "react-hook-form";
 
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
   options: { value: string; label: string }[];
   placeholder?: string;

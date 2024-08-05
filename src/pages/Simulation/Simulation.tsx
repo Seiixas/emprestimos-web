@@ -4,9 +4,10 @@ import { Header, Table } from "../../components/table";
 import ArrowIcon from "../../assets/arrow.svg";
 import { useFetch } from "../../hooks/use-fetch";
 import { formatCurrencyToBRL } from "../../utils/currency-formatter.utils";
-import { Bill, Loan } from "../../types/loan.types";
+import { Loan } from "../../types/loan.types";
 import { useEffect, useState } from "react";
 import { formatDateToDDMMYY } from "../../utils/date-formatter.utils";
+import { BillsFormatted } from "../../types/bills.types";
 
 interface LoanSimulator {
   outstanding_balance: string;
@@ -16,7 +17,7 @@ interface LoanSimulator {
   due_date: string;
 }
 
-const tableHeaders: Header<Bill>[] = [
+const tableHeaders: Header<BillsFormatted>[] = [
   { label: "Saldo Devedor", key: "outstandingBalance" },
   { label: "Juros", key: "interest" },
   { label: "Saldo Devedor Ajustado", key: "outstandingBalanceAdjusted" },
@@ -26,7 +27,7 @@ const tableHeaders: Header<Bill>[] = [
 
 const Simulation = () => {
   const { simulationId } = useParams<{ simulationId: string }>();
-  const [bills, setBills] = useState<Bill[]>([]);
+  const [bills, setBills] = useState<BillsFormatted[]>([]);
 
   const [{ data: loans }] = useFetch<LoanSimulator, Loan>(
     `/loans/simulation/${simulationId}`,

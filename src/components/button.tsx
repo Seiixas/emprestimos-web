@@ -6,7 +6,7 @@ import {
 } from "react";
 import cx from "classnames";
 
-interface ButtonProps
+export interface ButtonProps
   extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
   variant?: "primary" | "secondary";
 }

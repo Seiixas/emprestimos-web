@@ -25,7 +25,7 @@ type FormProps<T> = {
     | React.ReactNode;
 };
 
-export const Form = <T extends FieldValues>(props: FormProps<T>) => {
+const Form = <T extends FieldValues>(props: FormProps<T>) => {
   const { children, onSubmit, formId, schema, defaultValues } = props;
   const form = useForm<T>({
     resolver: schema && zodResolver(schema),
@@ -53,3 +53,5 @@ export const Form = <T extends FieldValues>(props: FormProps<T>) => {
 Form.Input = Input;
 Form.Button = Button;
 Form.Select = Select;
+
+export { Form };
