@@ -1,4 +1,4 @@
-import { forwardRef, SelectHTMLAttributes } from "react";
+import { forwardRef, Ref, SelectHTMLAttributes } from "react";
 import { useController, useFormContext } from "react-hook-form";
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
@@ -7,7 +7,10 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   placeholder?: string;
 }
 
-const BaseSelect = ({ name, options, placeholder, ...rest }: SelectProps) => {
+const BaseSelect = (
+  { name, options, placeholder, ...rest }: SelectProps,
+  ref: Ref<HTMLSelectElement>
+) => {
   const { control, formState } = useFormContext();
   const { field } = useController({ name, control });
 
@@ -16,10 +19,12 @@ const BaseSelect = ({ name, options, placeholder, ...rest }: SelectProps) => {
       <select
         {...rest}
         {...field}
+        ref={ref}
         className="border border-border-500 rounded-md px-4 py-3"
+        defaultValue={placeholder ? "placeholder" : field.value}
       >
         {placeholder && (
-          <option value="" disabled selected>
+          <option value="placeholder" disabled>
             {placeholder}
           </option>
         )}
@@ -38,4 +43,4 @@ const BaseSelect = ({ name, options, placeholder, ...rest }: SelectProps) => {
   );
 };
 
-export const Select = forwardRef(BaseSelect);
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(BaseSelect);

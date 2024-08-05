@@ -22,7 +22,7 @@ const Home = () => {
         variant: "error",
       });
     }
-  }, [error]);
+  }, [error, enqueueSnackbar]);
 
   const handleRequestLoanSimulation = async ({
     cpf,
