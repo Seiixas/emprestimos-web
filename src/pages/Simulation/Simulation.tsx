@@ -1,13 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../../components/button";
 import { Header, Table } from "../../components/table";
 import ArrowIcon from "../../assets/arrow.svg";
-import { useFetch } from "../../hooks/use-fetch";
+import { handleAxiosError, useFetch } from "../../hooks/use-fetch";
 import { formatCurrencyToBRL } from "../../utils/currency-formatter.utils";
 import { Loan } from "../../types/loan.types";
 import { useEffect, useState } from "react";
 import { formatDateToDDMMYY } from "../../utils/date-formatter.utils";
 import { BillsFormatted } from "../../types/bills.types";
+import { enqueueSnackbar } from "notistack";
 
 interface LoanSimulator {
   outstanding_balance: string;
@@ -26,15 +27,46 @@ const tableHeaders: Header<BillsFormatted>[] = [
 ];
 
 const Simulation = () => {
+  const navigate = useNavigate();
+
   const { simulationId } = useParams<{ simulationId: string }>();
   const [bills, setBills] = useState<BillsFormatted[]>([]);
 
-  const [{ data: loans }] = useFetch<LoanSimulator, Loan>(
+  const [{ data: loans, error: findLoanError }] = useFetch<LoanSimulator, Loan>(
     `/loans/simulation/${simulationId}`,
     {
       method: "GET",
     }
   );
+
+  useEffect(() => {
+    if (findLoanError) {
+      navigate("/404", {
+        replace: true,
+        state: { message: "Simulação não encontrada" },
+      });
+    }
+  }, [findLoanError, enqueueSnackbar]);
+
+  const [{ isFetching, error }, fetch] = useFetch<void, void>(
+    `/loans/${simulationId}`,
+    {
+      method: "POST",
+      manual: true,
+    }
+  );
+
+  useEffect(() => {
+    if (error) {
+      enqueueSnackbar(handleAxiosError(error), {
+        variant: "error",
+      });
+    }
+  }, [error, enqueueSnackbar]);
+
+  const handleCreateLoan = async () => {
+    await fetch();
+  };
 
   useEffect(() => {
     if (loans) {
@@ -102,7 +134,11 @@ const Simulation = () => {
               PROJEÇÃO DAS PARCELAS:
             </h3>
             <Table headers={tableHeaders} data={bills ?? []} />
-            <Button variant="secondary">
+            <Button
+              variant="secondary"
+              disabled={isFetching}
+              onClick={handleCreateLoan}
+            >
               <span>EFETIVAR O EMPRÉSTIMO</span>
               <img
                 src={ArrowIcon}
