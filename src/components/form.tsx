@@ -10,6 +10,7 @@ import { ZodSchema } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "./input";
 import { Button } from "./button";
+import { Select } from "./select";
 
 type FormProps<T> = {
   formId?: string;
@@ -51,3 +52,4 @@ export const Form = <T extends FieldValues>(props: FormProps<T>) => {
 
 Form.Input = Input;
 Form.Button = Button;
+Form.Select = Select;

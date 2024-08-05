@@ -63,9 +63,34 @@ const Home = () => {
             schema={requestLoanSimulationSchema}
             onSubmit={handleRequestLoanSimulation}
           >
-            <Form.Input name="cpf" placeholder="CPF" />
-            <Form.Input name="uf" placeholder="UF" />
-            <Form.Input name="birthday" placeholder="Data de Nascimento" />
+            <Form.Input name="cpf" placeholder="CPF" mask="999.999.999-99" />
+            <Form.Select
+              name="uf"
+              placeholder="UF"
+              options={[
+                {
+                  value: "SP",
+                  label: "SP",
+                },
+                {
+                  value: "MG",
+                  label: "MG",
+                },
+                {
+                  value: "ES",
+                  label: "ES",
+                },
+                {
+                  value: "RJ",
+                  label: "RJ",
+                },
+              ]}
+            />
+            <Form.Input
+              name="birthday"
+              placeholder="Data de Nascimento"
+              mask="99/99/9999"
+            />
             <Form.Input
               name="loan"
               placeholder="Valor do Empréstimo"

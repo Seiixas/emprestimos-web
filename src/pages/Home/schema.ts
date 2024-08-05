@@ -4,12 +4,11 @@ export const requestLoanSimulationSchema = z.object({
   cpf: z
     .string({ required_error: "O seu nome é obrigatório." })
     .min(1, "O seu nome é obrigatório."),
-  uf: z
-    .enum(["SP", "MG", "BR"], { required_error: "O estado é obrigatório." })
-    .refine((val) => ["SP", "MG", "BR"].includes(val), {
-      message: "O estado deve ser 'SP', 'MG', ou 'BR'",
-    }),
-  birthday: z.string(), // TODO: Mudar para date
+  uf: z.enum(["MG", "SP", "ES", "RJ"], {
+    required_error: "O estado é obrigatório.",
+    invalid_type_error: "O estado é inválido.",
+  }),
+  birthday: z.string({ required_error: "A data de nascimento é obrigatória." }),
   loan: z
     .string({ required_error: "O valor do empréstimo é obrigatório." })
     .min(0)
