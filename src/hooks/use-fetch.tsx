@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
-function handleAxiosError(err: unknown) {
+export function handleAxiosError(err: unknown) {
   const isAxiosError = err instanceof AxiosError;
 
   if (isAxiosError) {
@@ -38,7 +38,7 @@ export function useFetch<Request = any, Response = any>(
   depsArray: any[] = []
 ) {
   const [data, setData] = useState<Response | undefined>(undefined);
-  const [error, setError] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<unknown | undefined>(undefined);
   const [isFetching, setIsFetching] = useState(false);
 
   async function fetch(
@@ -58,9 +58,8 @@ export function useFetch<Request = any, Response = any>(
       });
       setData(response.data);
       return response.data;
-    } catch (error) {
-      console.log("error => ", JSON.stringify(error, null, 2));
-      setError(handleAxiosError(error));
+    } catch (requestError) {
+      setError(requestError);
       throw error;
     } finally {
       setIsFetching(false);

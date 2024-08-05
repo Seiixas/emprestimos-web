@@ -1,12 +1,12 @@
 import { useSnackbar } from "notistack";
 import { Form } from "../../components/form";
-import { useFetch } from "../../hooks/use-fetch";
+import { handleAxiosError, useFetch } from "../../hooks/use-fetch";
 import {
   requestLoanSimulationSchema,
   requestLoanSimulationType,
 } from "./schema";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -15,6 +15,14 @@ const Home = () => {
     method: "POST",
     manual: true,
   });
+
+  useEffect(() => {
+    if (error) {
+      enqueueSnackbar(handleAxiosError(error), {
+        variant: "error",
+      });
+    }
+  }, [error]);
 
   const handleRequestLoanSimulation = async ({
     cpf,
@@ -37,14 +45,6 @@ const Home = () => {
       navigate(`/${response.id}`);
     }
   };
-
-  useEffect(() => {
-    if (error) {
-      enqueueSnackbar("Ocorreu um erro ao solicitar o empréstimo", {
-        variant: "error",
-      });
-    }
-  }, [error, enqueueSnackbar]);
 
   return (
     <>
