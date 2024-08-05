@@ -6,8 +6,10 @@ import {
   requestLoanSimulationType,
 } from "./schema";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [{ isFetching, error }, fetch] = useFetch("/loans/simulation", {
     method: "POST",
@@ -21,7 +23,7 @@ const Home = () => {
     loan,
     installment,
   }: requestLoanSimulationType) => {
-    await fetch({
+    const response = await fetch({
       body: {
         cpf,
         uf,
@@ -30,6 +32,10 @@ const Home = () => {
         installments: Number(installment),
       },
     });
+
+    if (response) {
+      navigate(`/${response.id}`);
+    }
   };
 
   useEffect(() => {
