@@ -36,7 +36,7 @@ const Home = () => {
         cpf,
         uf,
         birthday,
-        loan: Number(loan), // TODO: Refatorar para usar o zod para fazer a conversão
+        loan: Number(loan),
         installments: Number(installment),
       },
     });

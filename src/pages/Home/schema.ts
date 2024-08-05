@@ -14,12 +14,17 @@ export const requestLoanSimulationSchema = z.object({
     .min(0)
     .max(50000, {
       message: "O valor do empréstimo deve ser menor que R$ 50.000,00",
+    })
+    .refine((val) => !Number.isNaN(parseInt(val, 10)), {
+      message: "O valor do empréstimo deve ser um número.",
     }),
   installment: z
     .string({
       required_error: "O valor da parcela é obrigatório.",
     })
-    .min(0), // TODO: Validar porcentagem do valor total
+    .refine((val) => !Number.isNaN(parseInt(val, 10)), {
+      message: "O valor da parcela deve ser um número.",
+    }),
 });
 
 export type requestLoanSimulationType = z.infer<
