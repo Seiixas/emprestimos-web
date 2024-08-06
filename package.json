@@ -6,11 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "yarn clean && yarn && yarn build:client && yarn postbuild",
-    "postbuild": "sh ./postbuild.sh",
     "build:client": "tsc && vite build",
     "clean": "rimraf dist node_modules yarn.lock .amplify-hosting",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postbuild": "chmod +x postbuild.sh && ./postbuild.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

@@ -11,9 +11,9 @@ frontend:
       commands:
         - yarn build
   artifacts:
-      baseDirectory: .amplify-hosting
-      files:
-          - '**/*'
+    baseDirectory: .amplify-hosting
+    files:
+      - '**/*'
   cache:
     paths:
       - node_modules/**/*
