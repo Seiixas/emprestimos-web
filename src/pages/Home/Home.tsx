@@ -95,10 +95,12 @@ const Home = () => {
               name="loan"
               placeholder="Valor do Empréstimo"
               type="number"
+              min={0}
             />
             <Form.Input
               name="installment"
               placeholder="Qual valor deseja pagar por mês?"
+              min={0}
             />
             <Form.Button disabled={isFetching} isLoading={isFetching}>
               Simular

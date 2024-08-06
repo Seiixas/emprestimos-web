@@ -17,19 +17,19 @@ const BaseButton = (
   ref: Ref<HTMLButtonElement>
 ) => {
   const styles = cx(
-    "border border-border-500 rounded-md px-4 py-2 font-semibold text-white uppercase shadow-[0px_4px_4px_0px_#87878740] flex items-center justify-center gap-2",
+    "border border-border-500 rounded-md px-4 py-2 font-semibold text-white uppercase shadow-[0px_4px_4px_0px_#87878740] flex items-center justify-center gap-2 disabled:cursor-wait",
     {
       "bg-orange-500": variant === "primary",
       "bg-green-500": variant === "secondary",
     }
   );
   return (
-    <div className="flex flex-col gap-4 items-center justify-center disabled:cursor-wait">
+    <>
       <button {...rest} ref={ref} className={styles}>
         {children}
       </button>
-      {isLoading && <span className="text-orange-500">Carregando...</span>}
-    </div>
+      {isLoading && <span className="text-orange-500 pt-4">Carregando...</span>}
+    </>
   );
 };
 

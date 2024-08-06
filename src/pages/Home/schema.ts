@@ -22,6 +22,9 @@ export const requestLoanSimulationSchema = z.object({
     .string({
       required_error: "O valor da parcela é obrigatório.",
     })
+    .min(0, {
+      message: "O valor da parcela deve ser maior que R$ 0,00",
+    })
     .refine((val) => !Number.isNaN(parseInt(val, 10)), {
       message: "O valor da parcela deve ser um número.",
     }),
