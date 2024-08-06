@@ -5,7 +5,7 @@ import ArrowIcon from "../../assets/arrow.svg";
 import { handleAxiosError, useFetch } from "../../hooks/use-fetch";
 import { formatCurrencyToBRL } from "../../utils/currency-formatter.utils";
 import { Loan } from "../../types/loan.types";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { formatDateToDDMMYY } from "../../utils/date-formatter.utils";
 import { BillsFormatted } from "../../types/bills.types";
 import { enqueueSnackbar } from "notistack";
@@ -64,9 +64,15 @@ const Simulation = () => {
     }
   }, [error, enqueueSnackbar]);
 
-  const handleCreateLoan = async () => {
+  const handleCreateLoan = useCallback(async () => {
     await fetch();
-  };
+
+    if (!error) {
+      navigate(`/success/${simulationId}`, {
+        replace: true,
+      });
+    }
+  }, [error]);
 
   useEffect(() => {
     if (loans) {
