@@ -24,17 +24,11 @@ const BaseButton = (
     }
   );
   return (
-    <div className="flex flex-col gap-4 items-center justify-center">
+    <div className="flex flex-col gap-4 items-center justify-center disabled:cursor-wait">
       <button {...rest} ref={ref} className={styles}>
         {children}
       </button>
-      <span>
-        {isLoading && (
-          <span className="text-orange-500">
-            <span>Carregando...</span>
-          </span>
-        )}
-      </span>
+      {isLoading && <span className="text-orange-500">Carregando...</span>}
     </div>
   );
 };
