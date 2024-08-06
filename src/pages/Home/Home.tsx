@@ -100,7 +100,9 @@ const Home = () => {
               name="installment"
               placeholder="Qual valor deseja pagar por mês?"
             />
-            <Form.Button disabled={isFetching}>Simular</Form.Button>
+            <Form.Button disabled={isFetching} isLoading={isFetching}>
+              Simular
+            </Form.Button>
           </Form>
         </section>
       </main>

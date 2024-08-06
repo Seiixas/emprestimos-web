@@ -144,6 +144,7 @@ const Simulation = () => {
               variant="secondary"
               disabled={isFetching}
               onClick={handleCreateLoan}
+              isLoading={isFetching}
             >
               <span>EFETIVAR O EMPRÉSTIMO</span>
               <img

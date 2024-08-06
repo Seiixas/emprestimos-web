@@ -9,10 +9,11 @@ import cx from "classnames";
 export interface ButtonProps
   extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
   variant?: "primary" | "secondary";
+  isLoading?: boolean;
 }
 
 const BaseButton = (
-  { children, variant = "primary", ...rest }: ButtonProps,
+  { children, variant = "primary", isLoading = false, ...rest }: ButtonProps,
   ref: Ref<HTMLButtonElement>
 ) => {
   const styles = cx(
@@ -23,9 +24,18 @@ const BaseButton = (
     }
   );
   return (
-    <button {...rest} ref={ref} className={styles}>
-      {children}
-    </button>
+    <div className="flex flex-col gap-4 items-center justify-center">
+      <button {...rest} ref={ref} className={styles}>
+        {children}
+      </button>
+      <span>
+        {isLoading && (
+          <span className="text-orange-500">
+            <span>Carregando...</span>
+          </span>
+        )}
+      </span>
+    </div>
   );
 };
 
