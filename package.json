@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "yarn clean && yarn && yarn build:client && yarn postbuild",
+    "build:client": "tsc && vite build",
+    "clean": "rimraf dist node_modules yarn.lock .amplify-hosting",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
