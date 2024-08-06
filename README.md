@@ -1,30 +1,51 @@
-# React + TypeScript + Vite
+# ⬢ Empréstimos Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![NodeJS logo](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![TypeScript Logo](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![react logo](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-Currently, two official plugins are available:
+> Empréstimos Web é uma aplicação front-end capaz de consumir um back-end para realizar simulações e efetivações de empréstimos:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 💻 Pré-requisitos
 
-## Expanding the ESLint configuration
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Node 20.12.0
+- Vite
+- API e bases de dados em funcionamento ([github.com/Seiixas/emprestimos-api](https://github.com/Seiixas/emprestimos-api))
+- Um cafézinho quente ☕️
 
-- Configure the top-level `parserOptions` property like this:
+## 🚀 Instalando
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Para instalar, siga estas etapas:
+
+Crie um clone do repositório
+
+```
+git clone https://github.com/Seiixas/emprestimos-web.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Acesse a pasta e instale as dependências:
+
+```bash
+cd emprestimos-web
+yarn
+```
+
+Adicione as variáveis de ambiente:
+
+```
+VITE_API_URL=http://localhost:3000
+```
+
+Finalmente, inicie o projeto:
+
+```
+yarn dev
+```
+
+Agora tome um golezinho de café enquanto aprecia o front-end xD
+
+## ☕ Usando o Empréstimos Web
+
+Você pode acessar o projeto a partir da porta `localhost:5173` ou, se preferir, acessar em produção em [https://emprestimos-web.onrender.com](https://emprestimos-web.onrender.com).
